@@ -21,58 +21,53 @@
 
 <br />
 
-> ### A. POLYFILLS
->
+### A. POLYFILLS
+
+<br />
+
+Write your implementation of the following functions: map, filter, reduce.
+
+> Map: <a href="#"> Look here</a>.
+> <br />
+> Filter: <a href="#"> Look here</a>.
+> <br />
+> Reduce: <a href="#"> Look here</a>.
 > <br />
 >
-> Write your implementation of the following functions: map, filter, reduce.
->
-> > Map: <a href="#"> Look here</a>.
-> > <br />
-> > Filter: <a href="#"> Look here</a>.
-> > <br />
-> > Reduce: <a href="#"> Look here</a>.
-> > <br />
->
+
+
+### B. ARRAY DATA
+
+<br />
+Update array data, according to the task, using the functions implemented in the task A.
+<br />
+
+<br />
+
+> #### 1. Map
+> 
+> <br />
+> Bring the array to such form: [{id: …, title: … },...].
+> <br /> <a href="#"> Look here</a>
+
+> #### 2. Filter
+> <br />
+> Get a new array only with marked elements ( isMarked: true ).
+> <br /> <a href="#"> Look here</a>
 > <br />
 
-> ### B. ARRAY DATA
->
+> #### 3. Reduce
 > <br />
-> Update array data, according to the task, using the functions implemented in the task A.
-
-> <br />
->
-> > #### 1. Map
-> >
-> > <br />
-> > Bring the array to such form: [{id: …, title: … },...].
-> > <br /> <a href="#"> Look here</a>
-
-> > <br />
-
-> > #### 2. Filter
-> >
-> > <br />
-> > Get a new array only with marked elements ( isMarked: true ).
-> > <br /> <a href="#"> Look here</a>
-> >
-> > <br />
-
-> > #### 3. Reduce
-> >
-> > <br />
-> > Using an array, get the total number of pages of notes.
-> > <br /> <a href="#"> Look here</a>
->
+> Using an array, get the total number of pages of notes.
+> <br /> <a href="#"> Look here</a>
 > <br />
 
-> ### C. UNIQUE ELEMENT
->
-> <br />
-> Write a function without using any libraries that will get an array of numbers and return the number, that exists in the array and exists only once. The complexity of the algorithm must be taken into account.
->  <br /> <a href="#"> Look here</a>
-> <br />
+### C. UNIQUE ELEMENT
+
+<br />
+Write a function without using any libraries that will get an array of numbers and return the number, that exists in the array and exists only once. The complexity of the algorithm must be taken into account.
+ <br /> <a href="#"> Look here</a>
+<br />
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
