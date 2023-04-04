@@ -46,20 +46,20 @@ Update array data, according to the task, using the functions implemented in the
 >
 > <br />
 > Bring the array to such form: [{id: …, title: … },...].
-> <br /> <a href="#"> Look here</a>
+> <br /> <a href="https://codepen.io/petrovskya-the-decoder/pen/oNPRBmZ"> Look here</a>
 
 > #### 2. Filter
 >
 > <br />
 > Get a new array only with marked elements ( isMarked: true ).
-> <br /> <a href="#"> Look here</a>
+> <br /> <a href="https://codepen.io/petrovskya-the-decoder/pen/poOmRYX"> Look here</a>
 > <br />
 
 > #### 3. Reduce
 >
 > <br />
 > Using an array, get the total number of pages of notes.
-> <br /> <a href="#"> Look here</a>
+> <br /> <a href="https://codepen.io/petrovskya-the-decoder/pen/wvEbgZY"> Look here</a>
 > <br />
 
 ### C. UNIQUE ELEMENT
