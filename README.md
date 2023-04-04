@@ -27,7 +27,7 @@
 
 Write your implementation of the following functions: map, filter, reduce.
 
-> Map: <a href="https://codepen.io/petrovskya-the-decoder/pen/zYJQoQb"> Look here</a>.
+> Map: <a href="https://codepen.io/petrovskya-the-decoder/pen/WNaergL"> Look here</a>.
 > <br />
 > Filter: <a href="https://codepen.io/petrovskya-the-decoder/pen/NWLVdBO"> Look here</a>.
 > <br />
