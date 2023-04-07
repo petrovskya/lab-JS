@@ -46,7 +46,7 @@
 //     };
 //   });
 
-// alert(JSON.stringify(videos, null, 2));
+// console.log(JSON.stringify(videos, null, 2));
 
 // Task 2
 
@@ -95,21 +95,23 @@
 //   },
 // ];
 
-// const VIDEOS = [];
-
-// movieLists.forEach(({ name, videos }) => {
-//   videos.forEach(({ id, title, rating }) => {
-//     if (rating == '5.0') {
-//       VIDEOS.push({
-//         name: name,
-//         id: id,
-//         title: title,
-//       });
-//     }
+// const formatVideos = (array) => {
+//   const formattedArray = [];
+//   array.forEach(({ name, videos }) => {
+//     videos.forEach(({ id, title, rating }) => {
+//       if (rating == '5.0') {
+//         formattedArray.push({
+//           name: name,
+//           id: id,
+//           title: title,
+//         });
+//       }
+//     });
 //   });
-// });
-
-// alert(JSON.stringify(VIDEOS, null, 2));
+//   return formattedArray;
+// };
+// const formattedVideos = formatVideos(movieLists);
+// console.log(JSON.stringify(formattedVideos, null, 2));
 
 // Task 3
 
@@ -162,7 +164,7 @@
 // movieLists.map(({ name, videos }) => {
 //   return videos.map(({ id, title, rating }) => {
 //     if (rating == '5.0') {
-//       return RATED_MOVIES.push({
+//       RATED_MOVIES.push({
 //         name: name,
 //         id: id,
 //         title: title,
@@ -172,7 +174,7 @@
 // });
 // const VIDEOS = [].concat.apply([], RATED_MOVIES);
 
-// alert(JSON.stringify(VIDEOS, null, 2));
+// console.log(JSON.stringify(VIDEOS, null, 2));
 
 // Task 4
 
@@ -315,15 +317,20 @@
 // ];
 
 // const findLargestBox = (array) => {
-//   const areas = [];
-//   array.forEach(({ width, height }) => {
-//     areas.push(width * height);
+//   let maxSquare = 0;
+//   let result;
+//   array.forEach((item) => {
+//     const { width, height } = item;
+//     let square = width * height;
+//     if (maxSquare < square) {
+//       maxSquare = square;
+//       return (result = item);
+//     }
 //   });
-//   const largestBoxIndex = areas.indexOf(Math.max(...areas));
-//   return array[largestBoxIndex];
+//   return result;
 // };
 
-// alert(JSON.stringify(findLargestBox(boxarts), null, 2));
+// console.log(JSON.stringify(findLargestBox(boxarts), null, 2));
 
 // Task 6
 
@@ -351,15 +358,15 @@
 // ];
 
 // const findLargestBoxURL = (array) => {
-//   const largestBox = array.reduce((previous_box, box) => {
-//     return box.width * box.height > previous_box.width * previous_box.height
+//   const largestBox = array.reduce((previousBox, box) => {
+//     return box.width * box.height > previouBox.width * previousBox.height
 //       ? box
-//       : previous_box;
+//       : previousBox;
 //   }, array[0]);
 //   return largestBox.url;
 // };
 
-// alert(findLargestBoxURL(boxarts));
+// сonsole.log(findLargestBoxURL(boxarts));
 
 // Task 7
 
@@ -389,4 +396,4 @@
 //   }, {});
 // };
 
-// alert(JSON.stringify(combineVideos(videos), null, 2));
+// console.log(JSON.stringify(combineVideos(videos), null, 2));
