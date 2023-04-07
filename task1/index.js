@@ -35,31 +35,37 @@ const NOTES = [
 
 // Task A
 
-Array.prototype.mapPolyfill = function (callbackFn) {
-  const arr = [];
-  for (let i = 0; i < this.length; i++) {
-    arr.push(callbackFn(this[i], i, this));
+const myMap = (collection, callback) => {
+  const array = [];
+  for (let i of collection) {
+    array.push(callback(i, collection.indexOf(i), collection));
   }
-  return arr;
+  return array;
 };
 
-Array.prototype.filterPolyfill = function (callbackFn, thisArg = this) {
-  const arr = [];
-  for (let i = 0; i < thisArg.length; i++) {
-    if (callbackFn.call(thisArg, this[i], i, this)) {
-      arr.push(this[i]);
+const myFilter = (collection, callback, thisArgument = collection) => {
+  const array = [];
+  for (let i of collection) {
+    if (callback.call(thisArgument, i, collection.indexOf(i), collection)) {
+      array.push(i);
     }
   }
-  return arr;
+  return array;
 };
 
-Array.prototype.reducePolyfill = function (callbackFn, initialValue) {
+const myReduce = (collection, callback, initialValue) => {
   let accumulator = initialValue;
-  for (let i = 0; i < this.length; i++) {
+  for (let i of collection) {
     if (accumulator !== undefined) {
-      accumulator = callbackFn.call(undefined, accumulator, this[i], i, this);
+      accumulator = callback.call(
+        undefined,
+        accumulator,
+        i,
+        collection.indexOf(i),
+        collection
+      );
     } else {
-      accumulator = this[i];
+      accumulator = i;
     }
   }
   return accumulator;
@@ -69,31 +75,30 @@ Array.prototype.reducePolyfill = function (callbackFn, initialValue) {
 
 // 1
 
-const TRANSFORMED_NOTES = NOTES.mapPolyfill(({ id, title }) => {
+const transformedNotes = myMap(NOTES, ({ id, title }) => {
   return {
     id: id,
     title: title,
   };
 });
 
-alert(JSON.stringify(TRANSFORMED_NOTES, null, 2));
+console.log(transformedNotes);
 
 // 2
 
-const MARKED_NOTES = NOTES.filterPolyfill((note) => {
-  if (note.isMarked) return note;
-});
+const markedNotes = myFilter(NOTES, (note) => note.isMarked);
 
-alert(JSON.stringify(MARKED_NOTES, null, 2));
+console.log(markedNotes);
 
 // 3
 
-const TOTAL_PAGES_OF_NOTES = NOTES.reducePolyfill(
+const totalPagesOfNotes = myReduce(
+  NOTES,
   (total, { pagesCount }) => (total += pagesCount),
   0
 );
 
-alert(`The total number of pages of all notes is ${TOTAL_PAGES_OF_NOTES}. `);
+console.log(`The total number of pages of all notes is ${totalPagesOfNotes}. `);
 
 // Task С
 
