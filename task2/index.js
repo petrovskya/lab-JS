@@ -16,11 +16,8 @@ boundFunction(100);
 
 // Task B
 
-const VOLTRON = new Robot('Voltron');
-const HUMAN = new Robot();
-
 function Robot(name) {
-  return (this.name = name);
+  this.name = name;
 }
 
 function add(op1, op2) {
@@ -28,6 +25,13 @@ function add(op1, op2) {
   return this.name + ' can count to ' + (op1 + op2);
 }
 
-alert(add.bind(HUMAN, 0, 1)());
-alert(add.call(VOLTRON, 1, 2));
-alert(add.apply(VOLTRON, [20, 30]));
+const VOLTRON = new Robot('Voltron');
+const HUMAN = new Robot();
+
+const operation1 = add.call(VOLTRON, 1, 2);
+const operation2 = add.bind(HUMAN, 0, 1)();
+const operation3 = add.apply(VOLTRON, [20, 30]);
+
+console.log(operation1);
+console.log(operation2);
+console.log(operation3);
