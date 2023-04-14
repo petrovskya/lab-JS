@@ -34,17 +34,18 @@ for (let d of makeDroids()) {
 const getRandomDelay = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min);
 };
+
 const getRoundedNumber = (number) => {
   const ROUNDING_DIGIT = 2;
   const DEVIDER = 1000;
   const roundedNumber = (number / DEVIDER).toFixed(ROUNDING_DIGIT);
   return roundedNumber;
 };
+
 const PROMISE = new Promise((resolve, reject) => {
   const MAX_EXECUTION_TIME = 2000;
   const MIN_DELAY = 1000;
   const MAX_DELAY = 5000;
-  const DEVIDER_TO_SECONDS = 1000;
   const delay = getRandomDelay(MIN_DELAY, MAX_DELAY);
   if (delay < MAX_EXECUTION_TIME) {
     resolve(getRoundedNumber(delay));
