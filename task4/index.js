@@ -1,5 +1,7 @@
 // TASK A
 
+const DURATION = 2000;
+
 function delay(duration) {
   return new Promise((resolve) => setTimeout(resolve, duration));
 }
@@ -7,7 +9,8 @@ function delay(duration) {
 function logHi() {
   console.log('Hi');
 }
-delay(2000).then(logHi);
+
+delay(DURATION).then(logHi);
 
 // TASK B
 
@@ -21,25 +24,32 @@ function makeDroids() {
   }
   return droids;
 }
+
 for (let d of makeDroids()) {
   d();
 }
 
 // TASK C
 
-const randomDelay = (min, max) => {
-  let delay = min + Math.random() * (max + 1 - min);
-  return Math.floor(delay);
+const getRandomDelay = (min, max) => {
+  return Math.floor(Math.random() * (max - min) + min);
 };
-
+const getRoundedNumber = (number) => {
+  const ROUNDING_DIGIT = 2;
+  const DEVIDER = 1000;
+  const roundedNumber = (number / DEVIDER).toFixed(ROUNDING_DIGIT);
+  return roundedNumber;
+};
 const PROMISE = new Promise((resolve, reject) => {
-  const delay = randomDelay(1000, 5000);
-  setTimeout(() => {
-    if (delay < 2000) {
-      resolve(delay / 1000);
-    }
-    reject(delay / 1000);
-  }, delay);
+  const MAX_EXECUTION_TIME = 2000;
+  const MIN_DELAY = 1000;
+  const MAX_DELAY = 5000;
+  const DEVIDER_TO_SECONDS = 1000;
+  const delay = getRandomDelay(MIN_DELAY, MAX_DELAY);
+  if (delay < MAX_EXECUTION_TIME) {
+    resolve(getRoundedNumber(delay));
+  }
+  reject(getRoundedNumber(delay));
 });
 
 PROMISE.then((result) => console.log(`On time! ${result}s < 2s`)).catch(
@@ -48,6 +58,11 @@ PROMISE.then((result) => console.log(`On time! ${result}s < 2s`)).catch(
 
 // TASK D
 
+const STATUSES = {
+  fulfilled: 200,
+  rejected: 404,
+};
+
 class HttpError extends Error {
   constructor(response) {
     super(`${response.status} for ${response.url}`);
@@ -55,24 +70,26 @@ class HttpError extends Error {
     this.response = response;
   }
 }
+
 async function loadJson(url) {
   let response = await fetch(url);
-  if (response.status == 200) {
+  if (response.status == STATUSES.fulfilled) {
     return response.json();
   } else {
     throw new HttpError(response);
   }
 }
+
 async function demoGithubUser() {
-  let user;
-  while (true) {
+  const isFetching = true;
+  while (isFetching) {
     let name = prompt('Login?', 'iliakan');
     try {
-      user = await loadJson(`https://api.github.com/users/${name}`);
+      let user = await loadJson(`https://api.github.com/users/${name}`);
       alert(`Full name: ${user.name}.`);
-      break;
+      return user;
     } catch (err) {
-      if (err instanceof HttpError && err.response.status == 404) {
+      if (err instanceof HttpError && STATUSES.rejected) {
         alert('We can’t find such user.');
       } else {
         throw err;
@@ -80,4 +97,5 @@ async function demoGithubUser() {
     }
   }
 }
+
 demoGithubUser();

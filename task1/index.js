@@ -37,17 +37,17 @@ const NOTES = [
 
 const myMap = (collection, callback) => {
   const array = [];
-  for (let i of collection) {
-    array.push(callback(i, collection.indexOf(i), collection));
+  for (let item of collection) {
+    array.push(callback(item));
   }
   return array;
 };
 
-const myFilter = (collection, callback, thisArgument = collection) => {
+const myFilter = (collection, callback) => {
   const array = [];
-  for (let i of collection) {
-    if (callback.call(thisArgument, i, collection.indexOf(i), collection)) {
-      array.push(i);
+  for (let item of collection) {
+    if (callback(item)) {
+      array.push(item);
     }
   }
   return array;
@@ -55,18 +55,8 @@ const myFilter = (collection, callback, thisArgument = collection) => {
 
 const myReduce = (collection, callback, initialValue) => {
   let accumulator = initialValue;
-  for (let i of collection) {
-    if (accumulator !== undefined) {
-      accumulator = callback.call(
-        undefined,
-        accumulator,
-        i,
-        collection.indexOf(i),
-        collection
-      );
-    } else {
-      accumulator = i;
-    }
+  for (let item of collection) {
+    accumulator = callback(accumulator, item);
   }
   return accumulator;
 };
@@ -105,23 +95,34 @@ console.log(`The total number of pages of all notes is ${totalPagesOfNotes}. `);
 const TEST_ARRAY = [1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 5, 5];
 
 const getUniqueNumber = (array) => {
+  const INITIAL_VAlLUE_OF_REPEAT = 0;
+  const COUNTING_STEP = 1;
+  const REQUIRED_REPEAT_VALUE = 1;
+  const REQUIRED_SINGLE_NUMBERS = 1;
+
   const SINGLE_ELEMENTS = [];
-  const NUMBERS_REPEAT_STATISTIC = array.reducePolyfill((variation, number) => {
-    variation[number] = (variation[number] || 0) + 1;
-    return variation;
-  }, {});
+
+  const NUMBERS_REPEAT_STATISTIC = myReduce(
+    array,
+    (variation, number) => {
+      variation[number] =
+        (variation[number] || INITIAL_VAlLUE_OF_REPEAT) + COUNTING_STEP;
+      return variation;
+    },
+    {}
+  );
 
   for (let [number, repetition] of Object.entries(NUMBERS_REPEAT_STATISTIC)) {
-    if (repetition === 1) {
+    if (repetition === REQUIRED_REPEAT_VALUE) {
       SINGLE_ELEMENTS.push(number);
     }
   }
 
-  if (SINGLE_ELEMENTS.length === 1) {
+  if (SINGLE_ELEMENTS.length === REQUIRED_SINGLE_NUMBERS) {
     return `Unique number is ${SINGLE_ELEMENTS.toString()}.`;
   } else return 'Ooops! There is no unique element here...';
 };
 
 const UNIQUE_NUMBER = getUniqueNumber(TEST_ARRAY);
 
-alert(UNIQUE_NUMBER);
+console.log(UNIQUE_NUMBER);

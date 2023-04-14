@@ -28,21 +28,33 @@ const DOWNLOADS = [
   },
 ];
 
-const TABLE = document.createElement('table');
-document.body.appendChild(TABLE);
-const TABLE_TITLE = TABLE.insertRow();
-for (let key in DOWNLOADS[0]) {
-  const CELL = TABLE_TITLE.insertCell();
-  CELL.innerText = key;
-}
+const CHECK_STATUS_DELAY = 3000;
+const DELAY_VALUE = 5000;
+const NOTE_STATUSES = {
+  PENDING: 'Pending',
+  DONE: 'Done',
+  FAILED: 'Failed',
+};
 
-for (let i = 0; i < DOWNLOADS.length; i++) {
-  let ROW = TABLE.insertRow();
-  for (let key in DOWNLOADS[i]) {
-    const CELL = ROW.insertCell();
-    CELL.innerText = DOWNLOADS[i][key];
+const fillTheTable = (array) => {
+  const TABLE = document.createElement('table');
+  document.body.appendChild(TABLE);
+  const TABLE_TITLE = TABLE.insertRow();
+  for (let key in array[0]) {
+    const CELL = TABLE_TITLE.insertCell();
+    CELL.innerText = key;
   }
-}
+
+  for (let i = 0; i < array.length; i++) {
+    let ROW = TABLE.insertRow();
+    for (let key in array[i]) {
+      const CELL = ROW.insertCell();
+      CELL.innerText = array[i][key];
+    }
+  }
+};
+
+fillTheTable(DOWNLOADS);
 
 const CHECK_BUTTON = document.createElement('button');
 document.body.appendChild(CHECK_BUTTON);
@@ -50,28 +62,30 @@ CHECK_BUTTON.innerHTML = 'Start status check';
 
 const TABLE_ROWS = document.querySelectorAll('tr');
 
-const DOWNLOADS_STATUS = Array.from(TABLE_ROWS).map((download) => {
-  return download.lastChild.innerText;
-});
+const DOWNLOADS_STATUS = Array.from(TABLE_ROWS).map(
+  (download) => download.lastChild.innerText
+);
 
 const changeStatus = (array, сurrentStatus, replacedStatus) => {
-  const FOUNDED_INDEX = array.findIndex((status) => status === сurrentStatus);
-  array[FOUNDED_INDEX] = replacedStatus;
-  TABLE_ROWS[FOUNDED_INDEX].lastChild.innerText = replacedStatus;
+  const foundedIndex = array.findIndex((status) => status === сurrentStatus);
+  array[foundedIndex] = replacedStatus;
+  TABLE_ROWS[foundedIndex].lastChild.innerText = replacedStatus;
 };
 
 const checkStatus = () => {
   const CHECK_INTERVAL = setInterval(() => {
     console.log('Check started');
-    changeStatus(DOWNLOADS_STATUS, 'Pending', 'Done');
-    if (DOWNLOADS_STATUS.every((status) => status !== 'Pending')) {
+    changeStatus(DOWNLOADS_STATUS, NOTE_STATUSES.PENDING, NOTE_STATUSES.DONE);
+    if (DOWNLOADS_STATUS.every((status) => status !== NOTE_STATUSES.PENDING)) {
       clearInterval(CHECK_INTERVAL);
       console.log('Check completed');
     }
-  }, 5000);
+  }, DELAY_VALUE);
 };
 
-CHECK_BUTTON.addEventListener('click', () => setTimeout(checkStatus, 3000));
+CHECK_BUTTON.addEventListener('click', () =>
+  setTimeout(checkStatus, CHECK_STATUS_DELAY)
+);
 
 // TASK B
 
@@ -86,6 +100,10 @@ const copyInputValue = (input) => {
     FIRST_INPUT.value = SECOND_INPUT.value;
   }
 };
-FORM.addEventListener('change', (e) => {
-  setTimeout(copyInputValue, 1000, e.target);
-});
+
+const onChange = (e) => {
+  const DELAY = 1000;
+  setTimeout(copyInputValue, DELAY, e.target);
+};
+
+FORM.addEventListener('change', onChange);
